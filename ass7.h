@@ -1,0 +1,8 @@
+//
+// Created by tuukka on 11.10.2021.
+//
+
+#ifndef CONCURRENT_PROGRAMMING_ASS7_H
+#define CONCURRENT_PROGRAMMING_ASS7_H
+
+#endif //CONCURRENT_PROGRAMMING_ASS7_H
