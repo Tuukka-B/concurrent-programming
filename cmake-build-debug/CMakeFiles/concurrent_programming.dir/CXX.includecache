@@ -61,12 +61,6 @@ iostream
 -
 thread
 -
-vector
--
-mutex
--
-condition_variable
--
 functional
 -
 atomic

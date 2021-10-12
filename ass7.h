@@ -1,5 +1,6 @@
 //
 // Created by tuukka on 11.10.2021.
+// Copyright: Tuukka Bordi
 //
 
 #ifndef CONCURRENT_PROGRAMMING_ASS7_H
@@ -81,9 +82,13 @@ int sensor_reader_worker(Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sens
 
     while (true) {
         array<int, 4> readings = { sensor1.reading.load(), sensor2.reading.load(), sensor3.reading.load(), sensor4.reading.load() };
+
+        // debug command:
+        //cout << sensor1.reading.load() << ", " << sensor2.reading.load() << ", " << sensor3.reading.load() << ", " << sensor4.reading.load() << "\n";
+
         std::this_thread::sleep_for(std::chrono::milliseconds (99));
         auto result = std::find_if(readings.cbegin(), readings.cend(), [](int reading) { return reading >= 4000; } );
-        if (*result >= 4000 && *result <= 4095) {
+        if (*result > 4000 && *result <= 4095) {
             return *result;
         }
 
