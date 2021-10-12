@@ -9,9 +9,6 @@
 
 #include <iostream>
 #include <thread>
-#include <vector>
-#include <mutex>
-#include <condition_variable>
 #include <functional>
 #include <atomic>
 #include <random>
@@ -80,14 +77,14 @@ private:
 };
 
 
-int sensor_reader_worker(promise<int>& p, Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sensor& sensor4) {
+int sensor_reader_worker(Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sensor& sensor4) {
 
     while (true) {
         array<int, 4> readings = { sensor1.reading.load(), sensor2.reading.load(), sensor3.reading.load(), sensor4.reading.load() };
         std::this_thread::sleep_for(std::chrono::milliseconds (99));
-        auto results = std::find_if(readings.cbegin(), readings.cend(), [](int reading) { return reading >= 4000; } );
-        if (*results >= 4000 && *results <= 4095) {
-            return *results;
+        auto result = std::find_if(readings.cbegin(), readings.cend(), [](int reading) { return reading >= 4000; } );
+        if (*result >= 4000 && *result <= 4095) {
+            return *result;
         }
 
     }
@@ -134,10 +131,12 @@ private:
     // worker 1 method
     void read_sensors(Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sensor& sensor4){
 
-        int val = sensor_reader_worker(threshold_value, sensor1, sensor2, sensor3, sensor4);
+        int val = sensor_reader_worker(sensor1, sensor2, sensor3, sensor4);
         threshold_value.set_value(val);
-        if (not halt_operations) is_received.get_future().get();
-        is_received = promise<bool>();
+        if (not halt_operations)  {
+            is_received.get_future().get();
+            is_received = promise<bool>();
+        }
 
         if (not halt_operations) {
             this->read_sensors(sensor1, sensor2, sensor3, sensor4);
@@ -156,7 +155,7 @@ private:
         threshold_value = promise<int>();
         is_received.set_value(true);
 
-        if (!halt_operations) {
+        if (not halt_operations) {
             this->read_thresholds();
         } else {
             w2_halted = true;
@@ -184,7 +183,7 @@ int ass7_main() {
 
     SensorReader sensor;
     sensor.start();
-    cout << "Press any key + enter to quit \n";
+    cout << "Press any key + enter to exit... \n";
     string exit;
     cin >> exit;
     cout << "Received exit command, shutting down processes...\n";
