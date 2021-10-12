@@ -138,12 +138,10 @@ private:
 
         int val = sensor_reader_worker(sensor1, sensor2, sensor3, sensor4);
         threshold_value.set_value(val);
-        if (not halt_operations)  {
-            is_received.get_future().get();
-            is_received = promise<bool>();
-        }
 
         if (not halt_operations) {
+            is_received.get_future().get();
+            is_received = promise<bool>();
             this->read_sensors(sensor1, sensor2, sensor3, sensor4);
         } else {
             sensor1.finish();
