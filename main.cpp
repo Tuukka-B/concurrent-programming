@@ -5,10 +5,10 @@
 //#include "ass4.h"
 #include "ass5.h"
 #include "ass6.h"
-#include <thread>
+#include "ass7.h"
 
 using namespace std;
 
 int main() {
-    ass6_main();
+    ass7_main();
 }

@@ -6,4 +6,5 @@ CMakeFiles/concurrent_programming.dir/main.cpp.o: \
  ../ass3.h \
  ../ass5.h \
  ../ass6.h \
+ ../ass7.h \
  ../main.cpp

@@ -56,6 +56,28 @@ atomic
 random
 -
 
+/home/tuukka/Desktop/git/concurrent-programming/ass7.h
+iostream
+-
+thread
+-
+vector
+-
+mutex
+-
+condition_variable
+-
+functional
+-
+atomic
+-
+random
+-
+future
+-
+algorithm
+-
+
 /home/tuukka/Desktop/git/concurrent-programming/main.cpp
 iostream
 -
@@ -67,6 +89,6 @@ ass5.h
 /home/tuukka/Desktop/git/concurrent-programming/ass5.h
 ass6.h
 /home/tuukka/Desktop/git/concurrent-programming/ass6.h
-thread
--
+ass7.h
+/home/tuukka/Desktop/git/concurrent-programming/ass7.h
 
