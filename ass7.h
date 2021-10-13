@@ -84,10 +84,10 @@ int sensor_reader_worker(Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sens
         array<int, 4> readings = { sensor1.reading.load(), sensor2.reading.load(), sensor3.reading.load(), sensor4.reading.load() };
 
         // debug command:
-        //cout << sensor1.reading.load() << ", " << sensor2.reading.load() << ", " << sensor3.reading.load() << ", " << sensor4.reading.load() << "\n";
+        // cout << sensor1.reading.load() << ", " << sensor2.reading.load() << ", " << sensor3.reading.load() << ", " << sensor4.reading.load() << "\n";
 
         std::this_thread::sleep_for(std::chrono::milliseconds (99));
-        auto result = std::find_if(readings.cbegin(), readings.cend(), [](int reading) { return reading >= 4000; } );
+        auto result = std::find_if(readings.cbegin(), readings.cend(), [](int reading) { return reading > 4000; } );
         if (*result > 4000 && *result <= 4095) {
             return *result;
         }
@@ -121,10 +121,10 @@ public:
             Sensor sensor2;
             Sensor sensor3;
             Sensor sensor4;
-            this->read_sensors(sensor1, sensor2, sensor3, sensor4);
+            this->send_threshold_readings(sensor1, sensor2, sensor3, sensor4);
         });
 
-        worker2 = std::thread([&]() { this->read_thresholds(); });
+        worker2 = std::thread([&]() { this->read_threshold_readings(); });
     }
 
     bool is_halted() {
@@ -134,7 +134,7 @@ public:
 private:
 
     // worker 1 method
-    void read_sensors(Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sensor& sensor4){
+    void send_threshold_readings(Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sensor& sensor4){
 
         int val = sensor_reader_worker(sensor1, sensor2, sensor3, sensor4);
         threshold_value.set_value(val);
@@ -142,7 +142,7 @@ private:
         if (not halt_operations) {
             is_received.get_future().get();
             is_received = promise<bool>();
-            this->read_sensors(sensor1, sensor2, sensor3, sensor4);
+            this->send_threshold_readings(sensor1, sensor2, sensor3, sensor4);
         } else {
             sensor1.finish();
             sensor2.finish();
@@ -153,13 +153,13 @@ private:
     }
 
     // worker 2 method
-    void read_thresholds(){
+    void read_threshold_readings(){
         cout << threshold_value.get_future().get() << "\n";
         threshold_value = promise<int>();
         is_received.set_value(true);
 
         if (not halt_operations) {
-            this->read_thresholds();
+            this->read_threshold_readings();
         } else {
             w2_halted = true;
         }
@@ -186,6 +186,8 @@ int ass7_main() {
 
     SensorReader sensor;
     sensor.start();
+
+    // Linux doesn't have 'press any key to exit', system(pause) so we do it the way we can:
     cout << "Press any key + enter to exit... \n";
     string exit;
     cin >> exit;
