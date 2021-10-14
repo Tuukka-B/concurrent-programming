@@ -125,7 +125,7 @@ void ass8_main(){
          > HEAVY generators: 40
          > LIGHT generators : 60
 
-     Analysis:
+     ANALYSIS:
         It seems like the time to complete both rounds was almost the same. For background, I did this with a Linux
         Machine with 12 logical CPUs (6 cores, I think). All the CPUs were at 100% until the program was finished.
 
@@ -142,7 +142,7 @@ void ass8_main(){
         a light-weight task like our light generator creates more costs than it has benefits. It makes more sense to
         create threads for heavy tasks, such as our heavy generators. I bet we could make the heavies async::deferred,
         and see that it takes _even longer_ to finish the program, since in that case the cost of creating a thread
-        would be negligible to th cost of not using multiple threads for these kinds of calculations.
+        would be negligible to the cost of not using multiple threads for these kinds of calculations.
 
      */
 
