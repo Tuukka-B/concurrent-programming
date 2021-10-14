@@ -23,7 +23,7 @@
 
 using namespace std;
 
-std::vector<int> thread_task(std::vector<int>& numbers) {
+vector<int> thread_task(vector<int>& numbers) {
 
     for (int i = 0; i < numbers.size(); ++i) {
         numbers[i] = rand();
@@ -35,9 +35,9 @@ int ass2_main() {
     cout << "Give a number as a size for the array: ";
     cin >> number;
 
-    std::vector<int> numbers(number);
+    vector<int> numbers(number);
 
-    thread worker = thread(thread_task, std::ref(numbers));
+    thread worker = thread(thread_task, ref(numbers));
 
     worker.join();
     cout << "The lucky numbers for the array are:\n";

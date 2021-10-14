@@ -16,7 +16,7 @@
  * Home Assignment 3
  *
  * Create a new console app.
- * Declare a std::vector as an dynamic array of numbers
+ * Declare a vector as an dynamic array of numbers
  * Create two threads, another will add numbers to the vector and another will remove them
  * Synchronize the threads with a Mutex.
  * Copy your source code to the Moodle return box.
@@ -29,7 +29,7 @@ class DataContainer
 public:
     DataContainer()
     {
-        numbers = std::vector<int>(0);
+        numbers = vector<int>(0);
     }
 
     void add_number() {
@@ -48,8 +48,8 @@ public:
 
     }
 
-    std::vector<int> numbers;
-    std::mutex m;
+    vector<int> numbers;
+    mutex m;
 };
 
 void add_number(DataContainer& data) {
@@ -71,8 +71,8 @@ void remove_number(DataContainer& data) {
 int ass3_main() {
     DataContainer numberClass;
 
-    thread worker1 = thread(add_number, std::ref(numberClass));
-    thread worker2 = thread(remove_number, std::ref(numberClass));
+    thread worker1 = thread(add_number, ref(numberClass));
+    thread worker2 = thread(remove_number, ref(numberClass));
 
     worker1.join();
     worker2.join();

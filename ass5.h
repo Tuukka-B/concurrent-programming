@@ -46,7 +46,7 @@ public:
         progress = 0;
     }
     int work(){
-            std::this_thread::sleep_for(std::chrono::seconds (1));
+            this_thread::sleep_for(chrono::seconds (1));
             progress += 20;
 
 
@@ -91,7 +91,7 @@ void worker(Application& app) {
 int ass5_main() {
     Application app;
     auto progress_check = [&app](int progress){ return app.check_progress() >= progress; };
-    thread worker1 = thread(worker, std::ref(app));
+    thread worker1 = thread(worker, ref(app));
     worker1.detach();
     progress_20.wait(mlock, [&app](){ return app.check_progress() >= 20; });
     cout << "Received worker 20% finished\n";

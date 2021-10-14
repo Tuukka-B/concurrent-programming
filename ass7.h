@@ -36,17 +36,17 @@ using namespace std;
 
 void sensor_worker(atomic<int>& reading, bool& stop) {
 
-    std::uniform_int_distribution<int> dist(0, 4095);
+    uniform_int_distribution<int> dist(0, 4095);
 
     while (!stop) {
-        std::random_device rd;
-        std::mt19937 mt(rd());
+        random_device rd;
+        mt19937 mt(rd());
         int random_num = dist(mt);
 
         // store variable to Sensor class instance
         reading.store(random_num);
 
-        std::this_thread::sleep_for(std::chrono::milliseconds (100));
+        this_thread::sleep_for(chrono::milliseconds (100));
     }
 
 
@@ -58,7 +58,7 @@ public:
     Sensor()
     {
         reading.store(0);
-        worker = std::thread([this]() { sensor_worker(reading, stop_thread); });
+        worker = thread([this]() { sensor_worker(reading, stop_thread); });
         stop_thread = false;
     }
 
@@ -70,7 +70,7 @@ public:
     }
 
     bool stop_thread;
-    std::thread worker;
+    thread worker;
     atomic<int> reading;
 
 private:
@@ -86,8 +86,8 @@ int sensor_reader_worker(Sensor& sensor1, Sensor& sensor2, Sensor& sensor3, Sens
         // debug command:
         // cout << sensor1.reading.load() << ", " << sensor2.reading.load() << ", " << sensor3.reading.load() << ", " << sensor4.reading.load() << "\n";
 
-        std::this_thread::sleep_for(std::chrono::milliseconds (99));
-        auto result = std::find_if(readings.cbegin(), readings.cend(), [](int reading) { return reading > 4000; } );
+        this_thread::sleep_for(chrono::milliseconds (99));
+        auto result = find_if(readings.cbegin(), readings.cend(), [](int reading) { return reading > 4000; } );
         if (*result > 4000 && *result <= 4095) {
             return *result;
         }
@@ -116,7 +116,7 @@ public:
     }
 
     void start(){
-        worker1 = std::thread([&]() {
+        worker1 = thread([&]() {
             Sensor sensor1;
             Sensor sensor2;
             Sensor sensor3;
@@ -124,7 +124,7 @@ public:
             this->send_threshold_readings(sensor1, sensor2, sensor3, sensor4);
         });
 
-        worker2 = std::thread([&]() { this->read_threshold_readings(); });
+        worker2 = thread([&]() { this->read_threshold_readings(); });
     }
 
     bool is_halted() {

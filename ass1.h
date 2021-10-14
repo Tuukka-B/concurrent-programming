@@ -31,7 +31,7 @@ int thread_task(int thread_count) {
 }
 
 int ass1_main() {
-    unsigned int thread_n = std::thread::hardware_concurrency();
+    unsigned int thread_n = thread::hardware_concurrency();
     thread available_threads[thread_n];
     for (int i = 0; i < thread_n; ++i) {
         available_threads[i] = thread(thread_task, i);

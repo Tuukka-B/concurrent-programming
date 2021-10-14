@@ -18,7 +18,7 @@
 
 using namespace std;
 
-std::atomic_flag consumerLock;
+atomic_flag consumerLock;
 
 class BankingContainer
 {
@@ -90,7 +90,7 @@ private:
     atomic<int> counter;
     string account_holder;
     atomic<double>  money_amount;
-    std::mutex m; // delete this
+    mutex m; // delete this
 
 };
 
@@ -135,9 +135,9 @@ void random_worker(BankingContainer& account1,BankingContainer& account2) {
         while (consumerLock.test_and_set()) { /* spin */ }
 
         // attribution (random number generator): https://stackoverflow.com/questions/19665818/generate-random-numbers-using-c11-random-library
-        std::random_device rd;
-        std::mt19937 mt(rd());
-        std::uniform_real_distribution<double> dist(1.0, 100.0);
+        random_device rd;
+        mt19937 mt(rd());
+        uniform_real_distribution<double> dist(1.0, 100.0);
         double random_num = dist(mt);
         // "coin flip": odd or even
         if (i % 2 == 0) {
@@ -159,10 +159,10 @@ int ass6_main() {
     BankingContainer alices_account("Alice", initial_balance);
     BankingContainer bobs_account("Bob", initial_balance);
 
-    thread worker1 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
-    thread worker2 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
-    thread worker3 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
-    thread worker4 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
+    thread worker1 = thread(random_worker, ref(alices_account), ref(bobs_account));
+    thread worker2 = thread(random_worker, ref(alices_account), ref(bobs_account));
+    thread worker3 = thread(random_worker, ref(alices_account), ref(bobs_account));
+    thread worker4 = thread(random_worker, ref(alices_account), ref(bobs_account));
 
     worker1.join();
     worker2.join();

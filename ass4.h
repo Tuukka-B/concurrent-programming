@@ -38,7 +38,7 @@ public:
             money_amount += amount;
             m.unlock();
         } else {
-            std::this_thread::sleep_for(std::chrono::nanoseconds (1));
+            this_thread::sleep_for(chrono::nanoseconds (1));
             this->deposit(amount);
         }
 
@@ -50,7 +50,7 @@ public:
             money_amount -= amount;
             m.unlock();
         } else {
-            std::this_thread::sleep_for(std::chrono::nanoseconds (1));
+            this_thread::sleep_for(chrono::nanoseconds (1));
             this->withdraw(amount);
         }
     }
@@ -63,7 +63,7 @@ public:
     }
     string account_holder;
     double money_amount;
-    std::mutex m;
+    mutex m;
 };
 
 void choose_operation(BankingContainer& account1, BankingContainer& account2, double random_num){
@@ -96,9 +96,9 @@ void random_worker(BankingContainer& account1,BankingContainer& account2) {
     int i = 0;
     while (i < 500) {
         // https://stackoverflow.com/questions/19665818/generate-random-numbers-using-c11-random-library
-        std::random_device rd;
-        std::mt19937 mt(rd());
-        std::uniform_real_distribution<double> dist(1.0, 100.0);
+        random_device rd;
+        mt19937 mt(rd());
+        uniform_real_distribution<double> dist(1.0, 100.0);
         double random_num = dist(mt);
         if (i % 2 == 0) {
             choose_operation(account1, account2, random_num);
@@ -116,10 +116,10 @@ int ass4_main() {
     BankingContainer alices_account("Alice",1000);
     BankingContainer bobs_account("Bob", 1000);
 
-    thread worker1 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
-    thread worker2 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
-    thread worker3 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
-    thread worker4 = thread(random_worker, std::ref(alices_account), std::ref(bobs_account));
+    thread worker1 = thread(random_worker, ref(alices_account), ref(bobs_account));
+    thread worker2 = thread(random_worker, ref(alices_account), ref(bobs_account));
+    thread worker3 = thread(random_worker, ref(alices_account), ref(bobs_account));
+    thread worker4 = thread(random_worker, ref(alices_account), ref(bobs_account));
 
     worker1.join();
     worker2.join();
