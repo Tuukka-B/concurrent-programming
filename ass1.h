@@ -6,15 +6,15 @@
 
 #endif //CONCURRENT_PROGRAMMING_ASS1_H
 
-/*
- * Teacher's instructions for assignment 1:
+/**
+ * Teacher's Instructions for Assignment 1:
  *
- *  * Make a new console app.
- *  * Detect amount of logical processors at app runtime.
- *  * Create as many threads as your computer has logical processors.
- *  * Each thread runs simultaneously a for loop for 1000 iterations and print the current loop value while running.
- *  * In main, wait for all threads to finish.
- *  * Copy the source code to Moodle return box.
+ * Make a new console app.
+ * Detect amount of logical processors at app runtime.
+ * Create as many threads as your computer has logical processors.
+ * Each thread runs simultaneously a for loop for 1000 iterations and print the current loop value while running.
+ * In main, wait for all threads to finish.
+ * Copy the source code to Moodle return box.
  */
 
 

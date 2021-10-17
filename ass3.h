@@ -12,8 +12,8 @@
 #include <vector>
 #include <mutex>
 
-/*
- * Home Assignment 3
+/**
+ * Teacher's Instructions for Assignment 3
  *
  * Create a new console app.
  * Declare a vector as an dynamic array of numbers

@@ -14,11 +14,11 @@
 /**
  * Teacher's instructions for assignment 2:
  *
- *  * Create new console app.
- *  * Ask user of how many numbers to allocate.
- *  * Allocate an array of numbers and pass it to thread that sets array elements to random numbers.
- *  * In main, wait for the thread to finish and print the contents of the array.
- *  * Copy your source code to Moodle return box.
+ * Create new console app.
+ * Ask user of how many numbers to allocate.
+ * Allocate an array of numbers and pass it to thread that sets array elements to random numbers.
+ * In main, wait for the thread to finish and print the contents of the array.
+ * Copy your source code to Moodle return box.
  */
 
 using namespace std;

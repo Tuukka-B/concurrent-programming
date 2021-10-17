@@ -16,17 +16,17 @@
 using namespace std;
 
 
-/*
- * Assignment 5
+/**
+ * Teacher's Instructions for Assignment 5:
  *
- *  * Create a new console app.
- *  * Create a worker thread with a long running task.
- *  * Use 5 condition variables within the worker thread to notify the main thread of the progress.
- *  *
- *  * Each condition variable amounts to 20% of the total task done
- *  *
- *  * In main thread, wait for the condition variables to complete and print the progress of the worker thread.
- *  * Copy your source code to the Moodle return box.
+ * Create a new console app.
+ * Create a worker thread with a long running task.
+ * Use 5 condition variables within the worker thread to notify the main thread of the progress.
+ *
+ * Each condition variable amounts to 20% of the total task done
+ *
+ * In main thread, wait for the condition variables to complete and print the progress of the worker thread.
+ * Copy your source code to the Moodle return box.
  */
 
 // global variables

@@ -14,14 +14,14 @@
 #include <random>
 using namespace std;
 
-/*
- * Home Assignment 4
+/**
+ * Teacher's Instructions for Assignment 4
  *
- *  * Create a class that simulates a bank account operations and holds the current balance of the account.
- *  * Add member functions for deposit, withdraw and balance.
- *  * Declare two bank account objects of aforementioned class and initialize with some balance.
- *  * Start 4 threads that will make random deposit and withdraw transactions between these two accounts.
- *  * Protect the bank account data with mutexes and avoid deadlocks.
+ * Create a class that simulates a bank account operations and holds the current balance of the account.
+ * Add member functions for deposit, withdraw and balance.
+ * Declare two bank account objects of aforementioned class and initialize with some balance.
+ * Start 4 threads that will make random deposit and withdraw transactions between these two accounts.
+ * Protect the bank account data with mutexes and avoid deadlocks.
  */
 
 class BankingContainer
