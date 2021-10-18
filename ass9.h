@@ -173,7 +173,7 @@ void ass8_worker(int thread_n){
     AirportLine security_check_line("Security Check", 0, thread_n, 10);
 
     auto enqueue_for_security_check = [&security_check_line](){security_check_line.enqueue();};
-    AirportLine boarding_pass_line("Boarding Pass Scan", 8, 1, 1, enqueue_for_security_check);
+    AirportLine boarding_pass_line("Boarding Pass Scan", 4, 1, 1, enqueue_for_security_check);
 
     cout << "Start of the situation (" << thread_n << " security lines): 4 people in the boarding pass scan line, 0 people in the security check line\n";
     auto start = chrono::high_resolution_clock::now();
@@ -204,15 +204,12 @@ void ass8_worker(int thread_n){
 void ass9_main(){
 
         thread worker1 = thread([](){ ass8_worker(4); });
-        /*
         thread worker2 = thread([](){ ass8_worker(2); });
         thread worker3 = thread([](){ ass8_worker(1); });
-        */
+
         worker1.join();
-        /*
         worker2.join();
         worker3.join();
-        */
     /**
 
         OUTPUT:
