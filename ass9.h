@@ -173,7 +173,7 @@ void ass8_worker(int thread_n){
     AirportLine security_check_line("Security Check", 0, thread_n, 10);
 
     auto enqueue_for_security_check = [&security_check_line](){security_check_line.enqueue();};
-    AirportLine boarding_pass_line("Boarding Pass Scan", 4, 1, 1, enqueue_for_security_check);
+    AirportLine boarding_pass_line("Boarding Pass Scan", 8, 1, 1, enqueue_for_security_check);
 
     cout << "Start of the situation (" << thread_n << " security lines): 4 people in the boarding pass scan line, 0 people in the security check line\n";
     auto start = chrono::high_resolution_clock::now();
@@ -204,13 +204,15 @@ void ass8_worker(int thread_n){
 void ass9_main(){
 
         thread worker1 = thread([](){ ass8_worker(4); });
+        /*
         thread worker2 = thread([](){ ass8_worker(2); });
         thread worker3 = thread([](){ ass8_worker(1); });
-
+        */
         worker1.join();
+        /*
         worker2.join();
         worker3.join();
-
+        */
     /**
 
         OUTPUT:
@@ -232,18 +234,21 @@ void ass9_main(){
                   unrealistic in a real situation
 
             2. Now assume that there are 2 security lines. Which is the new throughput?
-                - new throughput is 1 customer in 4 minutes 24 seconds
+                - new throughput is 1 customer in 5.5 minutes (with 4 customers). With more customers, the average would
+                  be closer to ~5 minutes per customer.
 
             3. If there were 4 security lines opened, would the pipeline be balanced?
                 - depends on the amount of customers, but for this example, it would be balanced. The throughput for
-                  4 security lines is 1 customer every 3.5 minutes. This is the best result if we have only 4 customers
-                  coming through.
+                  4 security lines is 1 customer every 3.5 minutes for 4 customers. The average time would be closer to
+                  ~2.5 minutes per customer if we'd have more customers.
 
         Comments:
             I wanted to try implementing a spinning barrier in this assignment, just to see if it worked. It worked out
             in the end but it took a lot of time to implement (it had many bugs in the beginning). I'm not sure if this
             program would work if we removed all the sleep() commands as it helps to ease contention. But it was fun,
             and I see implementing a thread that can access all of the class' variables does have it's benefits.
+
+            By the way, this program uses 8 threads so it can simulate 1, 2 and 4 security line scenarios concurrently.
 
      */
 
