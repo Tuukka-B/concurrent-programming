@@ -87,6 +87,9 @@
 		<Unit filename="/home/tuukka/Desktop/git/concurrent-programming/ass1.h">
 			<Option target="concurrent_programming"/>
 		</Unit>
+		<Unit filename="/home/tuukka/Desktop/git/concurrent-programming/ass10.h">
+			<Option target="concurrent_programming"/>
+		</Unit>
 		<Unit filename="/home/tuukka/Desktop/git/concurrent-programming/ass2.h">
 			<Option target="concurrent_programming"/>
 		</Unit>

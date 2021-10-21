@@ -6,6 +6,26 @@
 
 #IncludeRegexTransform: 
 
+/home/tuukka/Desktop/git/concurrent-programming/ass10.h
+iostream
+-
+chrono
+-
+vector
+-
+thread
+-
+cmath
+-
+condition_variable
+-
+mutex
+-
+deque
+-
+future
+-
+
 /home/tuukka/Desktop/git/concurrent-programming/ass2.h
 iostream
 -
@@ -109,4 +129,6 @@ ass8.h
 /home/tuukka/Desktop/git/concurrent-programming/ass8.h
 ass9.h
 /home/tuukka/Desktop/git/concurrent-programming/ass9.h
+ass10.h
+/home/tuukka/Desktop/git/concurrent-programming/ass10.h
 

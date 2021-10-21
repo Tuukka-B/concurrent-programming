@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 //#include "ass1.h"
 #include "ass2.h"
@@ -8,9 +9,11 @@
 #include "ass7.h"
 #include "ass8.h"
 #include "ass9.h"
+ */
+#include "ass10.h"
 
 using namespace std;
 
 int main() {
-    ass9_main();
+    ass10_main();
 }
