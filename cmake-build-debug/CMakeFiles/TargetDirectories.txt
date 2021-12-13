@@ -1,3 +1,0 @@
-/home/tuukka/Desktop/git/concurrent-programming/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/tuukka/Desktop/git/concurrent-programming/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/tuukka/Desktop/git/concurrent-programming/cmake-build-debug/CMakeFiles/concurrent_programming.dir
